@@ -1,0 +1,23 @@
+{
+    "codecov_badge_token": "<your-token-for-badges>",
+    "description": "A personal minimalist cookiecutter template with everything I need!",
+    "email": "rodolfo.olivieri3@gmail.com",
+    "full_name": "Rodolfo Olivieri",
+    "github_username": "r0x0d",
+    "project_name": "Cookiecutter Python Project",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "version": "0.0.0",
+    "year": "2022",
+    "open_source_license": [
+        "MIT License",
+        "BSD License",
+        "ISC License",
+        "Apache Software License 2.0",
+        "GNU General Public License v3",
+        "Not open source"
+    ],
+    "has_entrypoint": [
+        "Yes, create entrypoint",
+        "No, skip entrypoint"
+    ]
+}
