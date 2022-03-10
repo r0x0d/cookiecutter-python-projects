@@ -1,0 +1,59 @@
+{% raw %}name: Coverage
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#concurrency.
+# This will ensure that only one commit will be running tests at a time on each PR.
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: "${{ matrix.platform.name }} - Python (${{ matrix.python.version }})"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { name: Linux, distro: ubuntu-latest, pip_cache_path: ~/.cache/pip }
+        python:
+          - { version: 3.7, tox: py37 }
+          - { version: 3.8, tox: py38 }
+          - { version: 3.9, tox: py39 }
+          - { version: "3.10", tox: py310 }
+
+    runs-on: ${{ matrix.platform.distro }}
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ matrix.platform.pip_cache_path }}
+          key: pip-${{ matrix.platform.name }}-python-${{ matrix.python.version }}-${{ hashFiles('**/requirements/*.txt') }}
+
+      - uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python.version }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specifiedi
+
+      - name: Install tox
+        run: |
+          pip install tox
+
+      - name: Run tests
+        run: |
+          tox -e ${{ matrix.python.tox }}
+
+      - uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          env_vars: OS,PYTHON
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
+{% endraw %}
