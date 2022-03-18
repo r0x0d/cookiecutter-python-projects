@@ -1,0 +1,47 @@
+[project]
+name = "{{cookiecutter.project_slug}}"
+authors = [
+        {name="{{cookiecutter.full_name}}", email="{{cookiecutter.email}}"}
+]
+
+description = "{{cookiecutter.description}}"
+home-page = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}"
+requires-python = "~=3.0"
+readme = "README.md"
+dependencies = []
+
+[project.urls]
+repository = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}"
+documentation = "https://readthedocs.io/{{ cookiecutter.project_slug}}"
+
+[build-system]
+requires = ["mesonpep517"]
+build-backend = "mesonpep517.buildapi"
+
+[tool.mesonpep517.metadata]
+classifiers = [
+    "Intended Audience :: Developers",
+    "{{cookiecutter.open_source_license}}",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+meson-options = []
+meson-python-option-name = ""
+platforms = "any"
+
+{% if cookiecutter.has_entrypoint == 'Yes, create entrypoint' -%}
+[tool.mesonpep517.entry-points]
+console_scripts = [
+    '{{cookiecutter.project_slug}} = {{cookiecutter.project_slug}}.cli:main',
+]
+{%- endif%}
+
+[tool.yapf]
+based_on_style = "pep8"
+COALESCE_BRACKETS = true
+COLUMN_LIMIT = 100
+INDENT_CLOSING_BRACKETS = true
+JOIN_MULTIPLE_LINES = false
+SPLIT_BEFORE_ARITHMETIC_OPERATOR = true
+SPLIT_BEFORE_DOT = true
+SPLIT_BEFORE_EXPRESSION_AFTER_OPENING_PAREN = true

@@ -1,45 +1,156 @@
+---
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/mirrors-yapf
+    rev: v0.32.0
+    hooks:
+      - id: yapf
+        additional_dependencies:
+          - toml
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.1.0
     hooks:
-    -   id: trailing-whitespace
-    -   id: end-of-file-fixer
-    -   id: check-docstring-first
-    -   id: check-yaml
-    -   id: debug-statements
-    -   id: name-tests-test
-    -   id: requirements-txt-fixer
--   repo: https://github.com/psf/black
-    rev: 22.1.0
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-byte-order-marker
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: pretty-format-json
+        args:
+          - "--autofix"
+          - "--no-ensure-ascii"
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: detect-aws-credentials
+      - id: detect-private-key
+      - id: double-quote-string-fixer
+      - id: end-of-file-fixer
+      # - id: file-contents-sorter
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: name-tests-test
+        args:
+          - --django
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: "v0.941"
     hooks:
-    -   id: black
-        args: [-l, "79"]
--   repo: https://github.com/PyCQA/flake8
+      - id: mypy
+        additional_dependencies: [tokenize-rt==3.2.0]
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: "v1.9.0"
+    hooks:
+      - id: python-check-blanket-noqa
+      - id: python-check-blanket-type-ignore
+      - id: python-check-mock-methods
+      - id: python-no-eval
+      - id: python-no-log-warn
+      - id: python-use-type-annotations
+      - id: rst-backticks
+      - id: rst-directive-colons
+      - id: rst-inline-touching-normal
+      - id: text-unicode-replacement-char
+  - repo: https://github.com/asottile/yesqa
+    rev: v1.3.0
+    hooks:
+      - id: yesqa
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-markup
+    rev: v1.0.1
+    hooks:
+      - id: rst-linter
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.26.3
+    hooks:
+      - id: yamllint
+  - repo: https://github.com/frnmst/md-toc
+    rev: 8.1.1
+    hooks:
+      - id: md-toc
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.17.0
+    hooks:
+      - id: gitlint
+  - repo: https://github.com/PyCQA/flake8
     rev: 4.0.1
     hooks:
-    -   id: flake8
-        additional_dependencies: [flake8-typing-imports==1.12.0]
--   repo: https://github.com/asottile/pyupgrade
+      - id: flake8
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.4
+    hooks:
+      - id: bandit
+        args:
+          - "-x=tests"
+  - repo: https://github.com/PyCQA/pylint
+    rev: v3.0.0-a4
+    hooks:
+      - id: pylint
+        additional_dependencies:
+          - mccabe
+          - pylint-mccabe
+        args:
+          - "--load-plugins=pylint.extensions.mccabe"
+          - "--ignore-patterns=test_.*\\.py"
+          - "--disable=fixme"
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: "v2.3"
+    hooks:
+      - id: vulture
+        args:
+          - "suds"
+  - repo: https://github.com/PyCQA/pydocstyle
+    rev: 6.1.1
+    hooks:
+      - id: pydocstyle
+        additional_dependencies:
+          - toml
+        args:
+          - "--ignore=D212,D203,D202"
+          - "--match='(?!test_).*\\.py"
+  - repo: https://github.com/PyCQA/doc8
+    rev: 0.10.1
+    hooks:
+      - id: doc8
+  - repo: https://github.com/myint/rstcheck
+    rev: 3f92957478422df87bd730abde66f089cc1ee19b
+    hooks:
+      - id: rstcheck
+  - repo: https://github.com/tox-dev/tox-ini-fmt
+    rev: 0.5.2
+    hooks:
+      - id: tox-ini-fmt
+  - repo: https://github.com/jackdewinter/pymarkdown
+    rev: v0.9.5
+    hooks:
+      - id: pymarkdown
+  - repo: https://github.com/asottile/pyupgrade
     rev: v2.31.0
     hooks:
-    -   id: pyupgrade
+      - id: pyupgrade
         args: [--py37-plus]
--   repo: https://github.com/asottile/reorder_python_imports
+  - repo: https://github.com/asottile/reorder_python_imports
     rev: v2.7.1
     hooks:
-    -   id: reorder-python-imports
+      - id: reorder-python-imports
         args: [--py37-plus]
--   repo: https://github.com/asottile/add-trailing-comma
+  - repo: https://github.com/asottile/add-trailing-comma
     rev: v2.2.1
     hooks:
-    -   id: add-trailing-comma
+      - id: add-trailing-comma
         args: [--py36-plus]
--   repo: https://github.com/asottile/setup-cfg-fmt
-    rev: v1.20.0
+  - repo: local
     hooks:
-    -   id: setup-cfg-fmt
--   repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.931
-    hooks:
-    -   id: mypy
-        additional_dependencies: [types-all]
+      - id: git-diff
+        name: git diff
+        entry: git diff --exit-code
+        language: system
+        pass_filenames: false
+        always_run: true

@@ -1,6 +1,7 @@
+---
 name: 'Auto Author Assign'
 
-on:
+"on":
   pull_request_target:
     types: [opened, reopened]
 
