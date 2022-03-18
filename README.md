@@ -1,4 +1,4 @@
-[![Tests](https://github.com/r0x0d/cookiecutter-python-projects/actions/workflows/tests.yml/badge.svg)](https://github.com/r0x0d/cookiecutter-python-projects/actions/workflows/tests.yml)
+[![Tests](https://github.com/abadger/cookiecutter-python-projects/actions/workflows/tests.yml/badge.svg)](https://github.com/abadger/cookiecutter-python-projects/actions/workflows/tests.yml)
 
 # Cookiecutter Python Projects
 
