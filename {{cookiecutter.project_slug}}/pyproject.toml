@@ -45,3 +45,14 @@ JOIN_MULTIPLE_LINES = false
 SPLIT_BEFORE_ARITHMETIC_OPERATOR = true
 SPLIT_BEFORE_DOT = true
 SPLIT_BEFORE_EXPRESSION_AFTER_OPENING_PAREN = true
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+fail_under = 80
+skip_covered = true
+show_missing = true
+
+[tool.vulture]
+paths = ['{{cookiecutter.project_slug}}']
