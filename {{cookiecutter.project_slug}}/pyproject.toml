@@ -56,3 +56,6 @@ show_missing = true
 
 [tool.vulture]
 paths = ['{{cookiecutter.project_slug}}']
+
+[tool.mypy]
+show_error_codes = true
