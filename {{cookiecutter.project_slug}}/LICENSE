@@ -1,1 +1,1 @@
-{% include  ".cookiecutter_data/" + cookiecutter.open_source_license + ".txt" ignore missing %}
+{%- include  ".cookiecutter_data/" + cookiecutter.open_source_license + ".txt" ignore missing -%}
