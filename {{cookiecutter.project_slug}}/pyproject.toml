@@ -40,7 +40,6 @@ console_scripts = [
 based_on_style = "pep8"
 COALESCE_BRACKETS = true
 COLUMN_LIMIT = 100
-INDENT_CLOSING_BRACKETS = true
 JOIN_MULTIPLE_LINES = false
 SPLIT_BEFORE_ARITHMETIC_OPERATOR = true
 SPLIT_BEFORE_DOT = true
