@@ -105,7 +105,7 @@ repos:
     hooks:
       - id: vulture
         args:
-          - "suds"
+          - "{{ cookiecutter.project_slug }}"
   - repo: https://github.com/PyCQA/pydocstyle
     rev: 6.1.1
     hooks:
