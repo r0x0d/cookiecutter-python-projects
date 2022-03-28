@@ -22,6 +22,7 @@ build-backend = "mesonpep517.buildapi"
 classifiers = [
     "Intended Audience :: Developers",
     "{{cookiecutter.open_source_license}}",
+    "{%- include  '.cookiecutter_data/' + cookiecutter.open_source_license + '-classifier.txt' ignore missing -%}"
     "Programming Language :: Python :: 3",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
