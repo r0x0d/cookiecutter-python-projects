@@ -12,7 +12,7 @@ repos:
           - id: name-tests-test
           - id: requirements-txt-fixer
     - repo: https://github.com/psf/black
-      rev: 22.1.0
+      rev: 22.3.0
       hooks:
           - id: black
             args: [-l, "79"]
@@ -31,11 +31,11 @@ repos:
           - id: reorder-python-imports
             args: [--py37-plus]
     - repo: https://github.com/asottile/add-trailing-comma
-      rev: v2.2.1
+      rev: v2.2.2
       hooks:
           - id: add-trailing-comma
             args: [--py36-plus]
     - repo: https://github.com/asottile/setup-cfg-fmt
-      rev: v1.20.0
+      rev: v1.20.1
       hooks:
           - id: setup-cfg-fmt
