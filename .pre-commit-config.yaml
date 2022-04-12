@@ -1,4 +1,4 @@
-exclude: ^({{cookiecutter.project_slug}})
+exclude: ^({{cookiecutter.project_name}})
 repos:
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v4.2.0
