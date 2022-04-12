@@ -14,3 +14,12 @@ if __name__ == "__main__":
         remove_file("LICENSE")
 
     subprocess.check_call(["git", "init"])
+    subprocess.check_call(
+        [
+            "git",
+            "remote",
+            "add",
+            "origin",
+            "git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}",  # noqa: E501
+        ],
+    )

@@ -31,6 +31,7 @@ def bake_in_temp_dir(cookies, *args, **kwargs):
         cookie to be baked and its temporal files will be removed
     """
     result = cookies.bake(*args, **kwargs)
+    print(result)
     try:
         yield result
     finally:
@@ -56,9 +57,9 @@ def check_output_inside_dir(command, dirpath):
 def project_info(result):
     """Get toplevel dir, project_slug, and project dir from baked cookies"""
     project_path = str(result.project)
-    project_slug = os.path.split(project_path)[-1]
-    project_dir = os.path.join(project_path, project_slug)
-    return project_path, project_slug, project_dir
+    project_name = os.path.split(project_path)[-1]
+    project_dir = os.path.join(project_path, project_name)
+    return project_path, project_name, project_dir
 
 
 @pytest.mark.parametrize(
@@ -226,3 +227,23 @@ def test_pre_commit(cookies):
             )
             == 0
         )
+
+
+def test_has_correct_remote(cookies):
+    with bake_in_temp_dir(
+        cookies,
+        extra_context={"project_name": "test"},
+    ) as result:
+        assert result.project_path.is_dir()
+        remote = check_output_inside_dir(
+            "git remote",
+            str(result.project_path),
+        )
+
+        assert remote == b"origin\n"
+
+        remote = check_output_inside_dir(
+            "git remote show -n origin",
+            str(result.project_path),
+        )
+        assert b"git@github.com:r0x0d/test\n"
