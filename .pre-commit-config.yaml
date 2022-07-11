@@ -12,7 +12,7 @@ repos:
           - id: name-tests-test
           - id: requirements-txt-fixer
     - repo: https://github.com/psf/black
-      rev: 22.3.0
+      rev: 22.6.0
       hooks:
           - id: black
             args: [-l, "79"]
@@ -21,12 +21,12 @@ repos:
       hooks:
           - id: flake8
     - repo: https://github.com/asottile/pyupgrade
-      rev: v2.34.0
+      rev: v2.37.1
       hooks:
           - id: pyupgrade
             args: [--py37-plus]
     - repo: https://github.com/asottile/reorder_python_imports
-      rev: v3.1.0
+      rev: v3.8.1
       hooks:
           - id: reorder-python-imports
             args: [--py37-plus]
