@@ -25,11 +25,6 @@ jobs:
               distro: macos-latest,
               pip_cache_path: ~/Library/Caches/pip,
             }
-          - {
-              name: Windows,
-              distro: windows-latest,
-              pip_cache_path: ~\AppData\Local\pip\Cache,
-            }
         python:
           - { version: 3.7, tox: py37 }
           - { version: 3.8, tox: py38 }
