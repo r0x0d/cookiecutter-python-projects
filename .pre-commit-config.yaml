@@ -12,7 +12,7 @@ repos:
           - id: name-tests-test
           - id: requirements-txt-fixer
     - repo: https://github.com/psf/black
-      rev: 22.6.0
+      rev: 22.8.0
       hooks:
           - id: black
             args: [-l, "79"]
