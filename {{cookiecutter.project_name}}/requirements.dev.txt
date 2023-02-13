@@ -1,3 +1,0 @@
-covdefaults==2.2.0
-coverage==6.3.3
-pytest==7.1.2
