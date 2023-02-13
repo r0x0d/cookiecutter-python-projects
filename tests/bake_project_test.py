@@ -176,6 +176,7 @@ def test_bake_with_entrypoint_script(has_entrypoint, expected, cookies):
         else:
             assert expected not in setup_cfg_contents
 
+
 def test_has_correct_remote(cookies):
     with bake_in_temp_dir(
         cookies,
