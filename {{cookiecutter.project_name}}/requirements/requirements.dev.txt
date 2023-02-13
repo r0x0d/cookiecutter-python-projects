@@ -1,0 +1,4 @@
+covdefaults==2.2.2
+coverage==6.3.3
+pytest==7.2.1
+tox==4.4.4

@@ -1,2 +1,4 @@
+from {{cookiecutter.project_slug}}.__main__ import main
+
 def test_main():
-    assert True
+    assert main() == 0

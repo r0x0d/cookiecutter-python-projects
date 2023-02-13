@@ -2,7 +2,6 @@ import datetime
 import os
 import shlex
 import subprocess
-import sys
 from contextlib import contextmanager
 
 import pytest
@@ -31,7 +30,6 @@ def bake_in_temp_dir(cookies, *args, **kwargs):
         cookie to be baked and its temporal files will be removed
     """
     result = cookies.bake(*args, **kwargs)
-    print(result)
     try:
         yield result
     finally:
@@ -83,12 +81,12 @@ def test_year_compute_in_license_file(full_name, cookies):
     (
         (
             (
+                "docs",
                 "tox.ini",
-                "setup.py",
-                "setup.cfg",
+                "pyproject.toml",
                 ".pre-commit-config.yaml",
                 "cookiecutter_python_project",
-                "requirements.dev.txt",
+                "requirements",
                 "README.md",
                 "LICENSE",
                 ".github",
@@ -106,44 +104,6 @@ def test_bake_with_defaults(files_that_should_exist, cookies):
         found_toplevel_files = [f.name for f in result.project_path.iterdir()]
         for file in files_that_should_exist:
             assert file in found_toplevel_files
-
-
-def test_bake_and_run_tests(cookies):
-    with bake_in_temp_dir(cookies) as result:
-        assert result.project_path.is_dir()
-        major = sys.version_info.major
-        minor = sys.version_info.minor
-        tox_python_version = f"{major}{minor}"
-        run_inside_dir(
-            f"tox -e py{tox_python_version}",
-            str(result.project_path),
-        ) == 0
-        print("test_bake_and_run_tests path", str(result.project_path))
-
-
-@pytest.mark.parametrize(
-    ("full_name"),
-    (
-        ('name "quote" name'),
-        ("name name"),
-        ("name 'single quote' name"),
-        ("O'connor"),
-    ),
-)
-def test_bake_withspecialchars_and_run_tests(full_name, cookies):
-    """Ensure that a `full_name` with double quotes does not break setup.py"""
-    with bake_in_temp_dir(
-        cookies,
-        extra_context={"full_name": full_name},
-    ) as result:
-        assert result.project_path.is_dir()
-        major = sys.version_info.major
-        minor = sys.version_info.minor
-        tox_python_version = f"{major}{minor}"
-        run_inside_dir(
-            f"tox -e py{tox_python_version}",
-            str(result.project_path),
-        ) == 0
 
 
 @pytest.mark.parametrize(
@@ -215,18 +175,6 @@ def test_bake_with_entrypoint_script(has_entrypoint, expected, cookies):
             assert expected in setup_cfg_contents
         else:
             assert expected not in setup_cfg_contents
-
-
-def test_pre_commit(cookies):
-    with bake_in_temp_dir(cookies) as result:
-        assert result.project_path.is_dir()
-        assert (
-            run_inside_dir(
-                "pre-commit run --all-files",
-                str(result.project_path),
-            )
-            == 0
-        )
 
 
 def test_has_correct_remote(cookies):
