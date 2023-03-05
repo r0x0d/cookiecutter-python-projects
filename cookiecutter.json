@@ -6,7 +6,7 @@
     "project_name": "Cookiecutter Python Project",
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
     "version": "0.0.0",
-    "year": "2022",
+    "year": "2023",
     "open_source_license": [
         "MIT License",
         "BSD License",

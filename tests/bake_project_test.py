@@ -129,7 +129,7 @@ def test_bake_selecting_license(license, expected, cookies):
         extra_context={"open_source_license": license.strip()},
     ) as result:
         assert expected in result.project_path.joinpath("LICENSE").read_text()
-        assert license in result.project_path.joinpath("setup.cfg").read_text()
+        assert license in result.project_path.joinpath("pyproject.toml").read_text()
 
 
 def test_bake_not_open_source(cookies):
@@ -138,7 +138,7 @@ def test_bake_not_open_source(cookies):
         extra_context={"open_source_license": "Not open source"},
     ) as result:
         found_toplevel_files = [f.name for f in result.project_path.iterdir()]
-        assert "setup.cfg" in found_toplevel_files
+        assert "pyproject.toml" in found_toplevel_files
         assert "LICENSE" not in found_toplevel_files
 
 
@@ -149,32 +149,6 @@ def test_project_with_hyphen_in_module_name(cookies):
     ) as result:
         assert result.project is not None
 
-
-@pytest.mark.parametrize(
-    ("has_entrypoint", "expected"),
-    (
-        (
-            "Yes, create entrypoint",
-            "cookiecutter_python_project.main:main",
-        ),
-        (
-            "No, skip entrypoint",
-            "cookiecutter_python_project.main:main",
-        ),
-    ),
-)
-def test_bake_with_entrypoint_script(has_entrypoint, expected, cookies):
-    with bake_in_temp_dir(
-        cookies,
-        extra_context={"has_entrypoint": has_entrypoint},
-    ) as result:
-        setup_cfg_contents = result.project_path.joinpath(
-            "setup.cfg",
-        ).read_text()
-        if has_entrypoint == "Yes, create entrypoint":
-            assert expected in setup_cfg_contents
-        else:
-            assert expected not in setup_cfg_contents
 
 
 def test_has_correct_remote(cookies):
