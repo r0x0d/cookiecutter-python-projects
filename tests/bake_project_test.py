@@ -129,7 +129,10 @@ def test_bake_selecting_license(license, expected, cookies):
         extra_context={"open_source_license": license.strip()},
     ) as result:
         assert expected in result.project_path.joinpath("LICENSE").read_text()
-        assert license in result.project_path.joinpath("pyproject.toml").read_text()
+        assert (
+            license
+            in result.project_path.joinpath("pyproject.toml").read_text()
+        )
 
 
 def test_bake_not_open_source(cookies):
@@ -148,7 +151,6 @@ def test_project_with_hyphen_in_module_name(cookies):
         extra_context={"project_name": "something-with-a-dash"},
     ) as result:
         assert result.project is not None
-
 
 
 def test_has_correct_remote(cookies):
